@@ -9,6 +9,9 @@ export interface GetUsersResponse {
   username: string;
   password: string;
 }
+export type PostUserResponse = GetUsersResponse;
+
+export type PostUser = Omit<GetUsersResponse, 'id'>;
 
 export class User {
   constructor(
