@@ -21,22 +21,13 @@
   ],
   "clients": [
     {
-      "id": 1,
-      "firstname": "Test",
+      "firstname": "Test1",
       "surname": "Testowy",
       "email": "test@gmail.com",
       "phone": "123456789",
       "address": "Miasto ul. Testowa 12",
-      "postcode": "11-111"
-    },
-    {
-      "id": 2,
-      "firstname": "Test2",
-      "surname": "Testowy2",
-      "email": "test2@gmail.com",
-      "phone": "123456789",
-      "address": "Miasto ul. Testowa 12",
-      "postcode": "11-111"
+      "postcode": "11-111",
+      "id": 1
     },
     {
       "id": 3,
@@ -46,6 +37,24 @@
       "phone": "123456789",
       "address": "Miasto ul. Testowa 12",
       "postcode": "11-111"
+    },
+    {
+      "firstname": "Andrzej",
+      "surname": "Surm",
+      "email": "a@gmail.com",
+      "phone": "564637123",
+      "address": "Warszawa ul. Nijaka 4",
+      "postcode": "11-111",
+      "id": 4
+    },
+    {
+      "firstname": "Grzegorz",
+      "surname": "Greg",
+      "email": "g@gmail.com",
+      "phone": "456789",
+      "address": "Warszawa ul. Testowa",
+      "postcode": "111-111",
+      "id": 5
     }
   ]
 }

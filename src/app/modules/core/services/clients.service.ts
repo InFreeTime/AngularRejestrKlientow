@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+import { map, Observable } from 'rxjs';
 import {
   Client,
   ClientResponse,
@@ -22,7 +22,7 @@ export class ClientsService {
     itemsPerPage: number,
     sortDirection: string,
     sortColumnName: string,
-    value: string = '',
+    value = ''
   ): Observable<GetClientsResponse> {
     let params = new HttpParams()
       .append('_page', pageIndex)
@@ -47,7 +47,7 @@ export class ClientsService {
         map((response) => {
           if (!response.body) return { clients: [], totalCount: 0 };
 
-          const clientArr: Client[] = response.body.map(
+          const clientsArr: Client[] = response.body.map(
             ({ id, firstname, surname, email, phone, address, postcode }) =>
               new Client(
                 id,
@@ -56,13 +56,14 @@ export class ClientsService {
                 email,
                 phone,
                 address,
-                postcode,
-              ),
+                postcode
+              )
           );
+
           const totalCount = Number(response.headers.get('X-Total-Count'));
 
-          return { clients: clientArr, totalCount };
-        }),
+          return { clients: clientsArr, totalCount };
+        })
       );
   }
 
@@ -72,8 +73,8 @@ export class ClientsService {
       .pipe(
         map(
           ({ id, firstname, surname, email, phone, address, postcode }) =>
-            new Client(id, firstname, surname, email, phone, address, postcode),
-        ),
+            new Client(id, firstname, surname, email, phone, address, postcode)
+        )
       );
   }
 
@@ -83,8 +84,25 @@ export class ClientsService {
       .pipe(
         map(
           ({ id, firstname, surname, email, phone, address, postcode }) =>
-            new Client(id, firstname, surname, email, phone, address, postcode),
-        ),
+            new Client(id, firstname, surname, email, phone, address, postcode)
+        )
+      );
+  }
+
+  deleteClient(id: number): Observable<Record<string, never>> {
+    return this.http.delete<Record<string, never>>(
+      `${this.apiUrl}/clients/${id}`
+    );
+  }
+
+  putClient(clientData: PostClient, id: number): Observable<Client> {
+    return this.http
+      .put<ClientResponse>(`${this.apiUrl}/clients/${id}`, clientData)
+      .pipe(
+        map(
+          ({ id, firstname, surname, email, phone, address, postcode }) =>
+            new Client(id, firstname, surname, email, phone, address, postcode)
+        )
       );
   }
 }
